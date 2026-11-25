@@ -32,7 +32,7 @@
 </head>
 <body>
 <h1>Quem apresenta em 09/12?</h1>
-<div class="sub">Sorteio ao vivo: 3 grupos vão para 09/12, os outros 2 ficam com 02/12 (o Grupo 3 apresenta hoje e está fora do sorteio).</div>
+<div class="sub">Hoje (25/11): Grupo 3, que já se apresenta. Grupo 5 já está em 09/12. Sorteio ao vivo: mais 2 grupos vão para 09/12; os outros 2 ficam com 02/12.</div>
 
 <div class="grid" id="grid"></div>
 
@@ -60,7 +60,7 @@ const GROUPS=[
 function rnd(n){const lim=Math.floor(4294967296/n)*n;const a=new Uint32Array(1);do{crypto.getRandomValues(a)}while(a[0]>=lim);return a[0]%n}
 const $=id=>document.getElementById(id);
 let pool,d9,d2,busy,log;
-function init(){pool=GROUPS.slice();d9=[];d2=[];busy=false;log=[];render();$('draw').disabled=false;$('order').disabled=true;$('log').textContent=''}
+function init(){pool=GROUPS.filter(g=>g.n!==5);d9=[GROUPS.find(g=>g.n===5)];d2=[];busy=false;log=[];render();$('draw').disabled=false;$('order').disabled=true;$('log').textContent=''}
 function card(g,cls){return `<div class="g ${cls||''}" data-n="${g.n}"><b>Grupo ${g.n}</b><span>${g.t}</span></div>`}
 function render(spin){
   $('grid').innerHTML=GROUPS.map(g=>card(g,(d9.includes(g)?'out':'')+(spin===g?' spin':''))).join('');
